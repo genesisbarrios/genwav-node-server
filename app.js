@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 
 // Create a model based on the schema (same as before)
-const User = mongoose.model('user', userSchema);
+const User = userSchema;
 
 app.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳')
