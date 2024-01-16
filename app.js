@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const User = mongoose.model('user', userSchema);
 
 //POST
-app.post('/users', async (req, res) => {
+app.post('/addUser', async (req, res) => {
     const { name, email, producer, artist } = req.body;
 
     try {
