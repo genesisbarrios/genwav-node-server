@@ -1,7 +1,7 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import dbConnect from './dbConnect'; // Import your dbConnect function
-import userSchema from './user';
+const express = require('express')
+const bodyParser = require('body-parser');
+const dbConnect = require('./connectdb.js'); // Import your dbConnect function
+const userSchema = require('./user');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
