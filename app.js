@@ -15,7 +15,7 @@ const User = mongoose.model('user', userSchema);
 
 //POST
 app.post('/addUser', async (req, res) => {
-    const { name, email, producer, artist } = req.body;
+    const { email, producer, artist } = req.body;
 
     try {
         // Connect to the database using dbConnect function
@@ -28,7 +28,7 @@ app.post('/addUser', async (req, res) => {
         } else {
             // Create a new item
                 const newUser = new User({
-                    name: name,
+                    //name: name,
                     email: email,
                     producer: producer,
                     artist: artist
