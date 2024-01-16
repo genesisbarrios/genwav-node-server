@@ -13,6 +13,10 @@ app.use(bodyParser.json());
 // Create a model based on the schema (same as before)
 const User = mongoose.model('user', userSchema);
 
+app.get('/', (req, res) => {
+    res.send('Hey this is my API running 🥳')
+  })
+
 //POST
 app.post('/addUser', async (req, res) => {
     const { email, producer, artist } = req.body;
