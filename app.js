@@ -21,7 +21,7 @@ app.post('/addUser', async (req, res) => {
         // Connect to the database using dbConnect function
         const conn = await dbConnect();
 
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ email });
 
         if (user) {
             res.status(400).json({ message: 'You already signed up!' });
