@@ -27,26 +27,26 @@ app.post('/addUser', async (req, res) => {
             res.status(400).json({ message: 'You already signed up!' });
         } else {
             // Create a new item
-                const newUser = new User({
-                    //name: name,
-                    email: email,
-                    producer: producer,
-                    artist: artist
-                });
+            const newUser = new User({
+                //name: name,
+                email: email,
+                producer: producer,
+                artist: artist
+            });
 
-                // Save the item to the database
-                const savedItem = await newItem.save();
-                
-                res.json(savedItem);
-            } 
+            // Save the item to the database
+            const savedItem = await newItem.save();
+            
+            res.json(savedItem);
+        } 
         }catch (error) {
             res.status(400).json({ error: error.message });
-        }
-
-       
+        } 
 });
 
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+module.exports = app
