@@ -2,6 +2,7 @@
 Source : 
 https://github.com/vercel/next.js/blob/canary/examples/with-mongodb-mongoose/utils/dbConnect.js 
 **/
+require('dotenv').config();
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
 
@@ -45,3 +46,5 @@ async function dbConnect() {
   cached.conn = await cached.promise;
   return cached.conn;
 }
+
+module.exports = dbConnect;

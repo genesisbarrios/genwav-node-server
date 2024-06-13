@@ -10,12 +10,13 @@ const userSchema = new Schema(
         },
         name: String,
         producer: Boolean,
-        artist: Boolean
+        artist: Boolean,
+        fan: Boolean,
     },
     {
         timestamps: true
     }
 )
 
-const user = mongoose.models.user || mongoose.model("Users", userSchema);
+const user = mongoose.models.user || mongoose.model("users", userSchema);
 module.exports = user;

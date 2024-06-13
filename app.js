@@ -2,9 +2,14 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const dbConnect = require('./connectdb.js'); // Import your dbConnect function
 const userSchema = require('./user');
+const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+
+// Use cors middleware and allow all origins
+app.use(cors());
+
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -24,7 +29,7 @@ app.get('/', (req, res) => {
 
 //POST
 app.post('/addUser', async (req, res) => {
-    const { email, producer, artist } = req.body;
+    const { email, producer, artist, fan } = req.body;
     console.log(req.body)
     console.log('add user')
     try {
@@ -41,15 +46,18 @@ app.post('/addUser', async (req, res) => {
                 //name: name,
                 email: email,
                 producer: producer,
-                artist: artist
+                artist: artist,
+                fan:fan
             });
 
             // Save the item to the database
-            const savedItem = await newItem.save();
-            
-            res.json(savedItem);
+            const savedItem = await newUser.save();
+            console.log('saved user!');
+            res.status(200).json({ message: 'User added successfully' });
         } 
         }catch (error) {
+            console.log('failed');
+            console.log(error)
             res.status(400).json({ error: error.message });
         } 
 });
