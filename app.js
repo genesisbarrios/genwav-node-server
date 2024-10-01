@@ -4,7 +4,7 @@ const dbConnect = require('./connectdb.js'); // Import your dbConnect function
 const userSchema = require('./user');
 const cors = require('cors');
 
-const app = express();
+const app = express.Router();
 
 // Use cors middleware and allow all origins
 app.use(cors());
