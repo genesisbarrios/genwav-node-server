@@ -6,9 +6,9 @@ require('dotenv').config();
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
 
-// if (!process.env.MONGODB_URI) {
-//   throw new Error("Please add your MONGODB_URI to .env.local");
-// }
+if (!process.env.MONGODB_URI) {
+  throw new Error("Please add your MONGODB_URI to .env.local");
+}
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
