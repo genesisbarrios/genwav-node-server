@@ -5,7 +5,7 @@ const userSchema = require('./user');
 const cors = require('cors');
 
 const app = express();
-const router = app.Router();
+const router = express.Router();
 
 // Use cors middleware and allow all origins
 router.use(express.json());
