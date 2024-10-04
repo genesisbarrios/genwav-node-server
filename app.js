@@ -21,7 +21,7 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳')
   })
 
@@ -59,5 +59,8 @@ router.post('/addUser', async (req, res) => {
             res.status(400).json({ error: error.message });
         } 
 });
+
+// Mount the router
+app.use('/', router);
 
 module.exports = app
