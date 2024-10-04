@@ -5,7 +5,7 @@ const cors = require('cors');
 const express = require('express');
 const serverless = require('serverless-http');
 
-const app = express();
+const app = express;
 const router = express.Router();
 
 // Use cors middleware and allow all origins
