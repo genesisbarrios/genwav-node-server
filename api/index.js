@@ -14,7 +14,7 @@ app.use(cors());
 
 const User = mongoose.model('User', userSchema);
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳');
 });
 
