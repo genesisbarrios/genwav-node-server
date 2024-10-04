@@ -4,16 +4,14 @@ const dbConnect = require('./connectdb.js'); // Import your dbConnect function
 const userSchema = require('./user');
 const cors = require('cors');
 
-const app = express.Router();
+const app = express();
+const router = app.Router();
 
 // Use cors middleware and allow all origins
-app.use(cors());
+router.use(express.json());
+router.use(cors());
 
 const PORT = process.env.PORT || 3000;
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
 
 // Create a model based on the schema (same as before)
 const User = userSchema;
@@ -23,12 +21,12 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳')
   })
 
 //POST
-app.post('/addUser', async (req, res) => {
+router.post('/addUser', async (req, res) => {
     const { email, producer, artist, fan } = req.body;
     console.log(req.body)
     console.log('add user')
@@ -61,7 +59,5 @@ app.post('/addUser', async (req, res) => {
             res.status(400).json({ error: error.message });
         } 
 });
-
-
 
 module.exports = app
