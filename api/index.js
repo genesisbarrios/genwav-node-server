@@ -3,7 +3,7 @@ const userSchema = require('../user'); // Adjust the path as necessary
 const dbConnect = require('../connectdb'); // Adjust the path as necessary
 const cors = require('cors');
 const express = require('express');
-// const serverless = require('serverless-http');
+const serverless = require('serverless-http');
 
 const app = express();
 const router = express.Router();
@@ -14,7 +14,7 @@ app.use(cors());
 
 const User = mongoose.model('User', userSchema);
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳');
 });
 
@@ -54,4 +54,4 @@ router.post('/addUser', async (req, res) => {
 app.use('/api', router);
 
 module.exports = app;
-// module.exports.handler = serverless(app);
+module.exports.handler = serverless(app);
