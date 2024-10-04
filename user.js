@@ -9,9 +9,9 @@ const userSchema = new Schema(
             unique: true
         },
         name: String,
-        producer: Boolean,
-        artist: Boolean,
-        fan: Boolean,
+        producer: { type: Boolean, default: false },
+        artist: { type: Boolean, default: false },
+        fan: { type: Boolean, default: false },
     },
     {
         timestamps: true

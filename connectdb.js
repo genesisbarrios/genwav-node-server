@@ -27,24 +27,16 @@ if (!cached) {
   cached = globalWithMongoose.mongoose = { conn: null, promise: null };
 }
 
-async function dbConnect() {
-  if (cached.conn) {
-    return cached.conn;
+const dbConnect = async () => {
+  if (mongoose.connection.readyState >= 1) {
+      return;
   }
 
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-      connectTimeoutMS: 60000,
-      socketTimeoutMS: 3600000
-    };
+  return mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+  });
+};
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
-  }
-  cached.conn = await cached.promise;
-  return cached.conn;
-}
 
 module.exports = dbConnect;
