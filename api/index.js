@@ -5,7 +5,7 @@ const cors = require('cors');
 const express = require('express');
 const serverless = require('serverless-http');
 
-const app = express;
+const app = express(); // Correctly initialize the Express app
 const router = express.Router();
 
 // Use cors middleware and allow all origins
@@ -14,7 +14,7 @@ app.use(cors());
 
 const User = mongoose.model('User', userSchema);
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳');
 });
 
@@ -51,6 +51,7 @@ router.post('/addUser', async (req, res) => {
     }
 });
 
+// Mount the router on the app
 app.use('/api', router);
 
 module.exports = app;
