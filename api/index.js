@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const user = require('../user'); // Adjust the path as necessary
+const userSchema = require('../user'); // Adjust the path as necessary
 const dbConnect = require('../connectdb'); // Adjust the path as necessary
 const cors = require('cors');
 const express = require('express');
@@ -12,7 +12,7 @@ const router = express.Router();
 app.use(express.json());
 app.use(cors());
 
-const User = mongoose.model('User', user);
+const User = mongoose.model('User', userSchema);
 
 router.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳');
