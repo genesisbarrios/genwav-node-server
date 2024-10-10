@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳');
 });
 
-router.post('/addUser', async (req, res) => {
+app.post('/addUser', async (req, res) => {
     const { email, producer, artist, fan } = req.body;
     console.log(req.body);
     console.log('add user');
