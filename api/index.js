@@ -75,7 +75,8 @@ const allowCors = fn => async (req, res) => {
     res.end(d.toString())
   }
   
-module.exports = allowCors(handler)
+
   
 module.exports = app;
-module.exports.handler = serverless(app);
+const serverlessHandler = serverless(app);
+module.exports = allowCors(serverlessHandler)
