@@ -51,8 +51,7 @@ app.post('/addUser', async (req, res) => {
     }
 });
 
-// Mount the router on the app
-app.use('/api', router);
+
 const allowCors = fn => async (req, res) => {
     res.setHeader('Access-Control-Allow-Credentials', true)
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -70,13 +69,14 @@ const allowCors = fn => async (req, res) => {
     return await fn(req, res)
   }
   
-  const handler = (req, res) => {
-    const d = new Date()
-    res.end(d.toString())
-  }
+//   const handler = (req, res) => {
+//     const d = new Date()
+//     res.end(d.toString())
+//   }
   
-
+// Mount the router on the app
+app.use('/api', router);
   
-module.exports = app;
-const serverlessHandler = serverless(app);
-module.exports = allowCors(serverlessHandler)
+// module.exports = app;
+const handler = serverless(app);
+module.exports.handler = allowCors(handler)
