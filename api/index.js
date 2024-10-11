@@ -10,7 +10,11 @@ const router = express.Router();
 
 // Use cors middleware and allow all origins
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000','0.0.0.0'], // Allow requests from this origin
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}));
 
 const User = mongoose.model('User', userSchema);
 
