@@ -10,11 +10,7 @@ const router = express.Router();
 
 // Use cors middleware and allow all origins
 app.use(express.json());
-app.use(cors({
-  origin: ['http://localhost:3000','0.0.0.0'], // Allow requests from this origin
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type']
-}));
+app.use(cors());
 
 const User = mongoose.model('User', userSchema);
 
@@ -57,6 +53,29 @@ app.post('/addUser', async (req, res) => {
 
 // Mount the router on the app
 app.use('/api', router);
-
+const allowCors = fn => async (req, res) => {
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    // another common pattern
+    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    )
+    if (req.method === 'OPTIONS') {
+      res.status(200).end()
+      return
+    }
+    return await fn(req, res)
+  }
+  
+  const handler = (req, res) => {
+    const d = new Date()
+    res.end(d.toString())
+  }
+  
+module.exports = allowCors(handler)
+  
 module.exports = app;
 module.exports.handler = serverless(app);
