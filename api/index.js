@@ -10,8 +10,11 @@ const router = express.Router();
 
 // Use cors middleware and allow all origins
 app.use(express.json());
-app.use(cors());
-
+app.use(cors({
+    origin: 'https://genwav.xyz',
+    methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE', 'PUT'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
 const User = mongoose.model('User', userSchema);
 
 app.get('/', (req, res) => {
