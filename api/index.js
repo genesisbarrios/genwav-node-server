@@ -9,12 +9,15 @@ const app = express(); // Correctly initialize the Express app
 const router = express.Router();
 
 // Use cors middleware and allow all origins
-app.use(express.json());
+
 app.use(cors({
     origin: 'https://genwav.xyz',
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization']
   }));
+
+app.use(express.json());
+
 const User = mongoose.model('User', userSchema);
 
 app.get('/', (req, res) => {
@@ -53,24 +56,6 @@ app.post('/addUser', async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
-
-
-const allowCors = fn => async (req, res) => {
-    res.setHeader('Access-Control-Allow-Credentials', true)
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    // another common pattern
-    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-    res.setHeader('Access-Control-Allow-Methods', 'GET,DELETE,POST,PUT')
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    )
-    if (req.method === 'OPTIONS') {
-      res.status(200).end()
-      return
-    }
-    return await fn(req, res)
-  }
   
 //   const handler = (req, res) => {
 //     const d = new Date()
@@ -78,7 +63,7 @@ const allowCors = fn => async (req, res) => {
 //   }
   
 // Mount the router on the app
-app.use('/api', router);
+app.use('/api', app);
   
 // module.exports = app;
 const handler = serverless(app);
