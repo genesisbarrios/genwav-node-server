@@ -1,4 +1,8 @@
 {
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
+  "git": {
+    "deploymentEnabled": false
+  },
   "version": 2,
   "builds": [
     {
