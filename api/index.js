@@ -9,25 +9,8 @@ const app = express(); // Correctly initialize the Express app
 const router = express.Router();
 
 // Use cors middleware and allow all origins
-const allowCors = fn => async (req, res) => {
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Origin', 'https://genwav.xyz'); // Allow requests from this origin
-    // another common pattern
-    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    );
-    if (req.method === 'OPTIONS') {
-      res.status(200).end();
-      return;
-    }
-    return await fn(req, res);
-};
-
-
 app.use(express.json());
+app.use(cors());
 
 const User = mongoose.model('User', userSchema);
 
@@ -68,6 +51,24 @@ app.post('/addUser', async (req, res) => {
     }
 });
 
+
+const allowCors = fn => async (req, res) => {
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    // another common pattern
+    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET,DELETE,POST,PUT')
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    )
+    if (req.method === 'OPTIONS') {
+      res.status(200).end()
+      return
+    }
+    return await fn(req, res)
+  }
+  
 //   const handler = (req, res) => {
 //     const d = new Date()
 //     res.end(d.toString())
