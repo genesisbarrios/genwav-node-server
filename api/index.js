@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 const User = mongoose.model('User', userSchema);
+const userEnigma = mongoose.model('UserEnigma', userEnigmaSchema);
 
 app.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳');
@@ -37,6 +38,38 @@ app.post('/addUser', async (req, res) => {
                 producer: producer,
                 artist: artist,
                 fan: fan
+            });
+
+            // Save the item to the database
+            const savedItem = await newUser.save();
+            console.log('saved user!');
+            res.status(200).json({ message: 'User added successfully' });
+        }
+    } catch (error) {
+        console.log('failed');
+        console.log(error);
+        res.status(400).json({ error: error.message });
+    }
+});
+
+app.post('/addUserEnigma', async (req, res) => {
+    const { email, audio, visuals, web } = req.body;
+    console.log('add user enigma');
+    try {
+        // Connect to the database using dbConnect function
+        await dbConnect();
+
+        const user = await userEnigma.findOne({ email });
+
+        if (user) {
+            res.status(400).json({ message: 'You already signed up!' });
+        } else {
+            // Create a new item
+            const newUser = new userEnigma({
+                email: email,
+                audio: audio,
+                visuals: visuals,
+                web: web
             });
 
             // Save the item to the database
