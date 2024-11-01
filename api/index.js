@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const userSchema = require('../user'); // Adjust the path as necessary
+const enigmaUserSchema = require('../enigmaUser'); // Adjust the path as necessary
 const dbConnect = require('../connectdb'); // Adjust the path as necessary
 const cors = require('cors');
 const express = require('express');
@@ -13,7 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 const User = mongoose.model('User', userSchema);
-const enigmaUser = mongoose.model('EnigmaUser', enigmaUser);
+const enigmaUser = mongoose.model('EnigmaUser', enigmaUserSchema);
 
 app.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳');
