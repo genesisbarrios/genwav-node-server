@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userEnigmaSchema = new Schema(
+const enigmaUserSchema = new Schema(
     {
         email: {
             type: String,
@@ -9,7 +9,8 @@ const userEnigmaSchema = new Schema(
             unique: true
         },
         name: String,
-        audio: Boolean,
+        beats: Boolean,
+        loops: Boolean,
         visuals: Boolean,
         web: Boolean,
     },
@@ -18,4 +19,4 @@ const userEnigmaSchema = new Schema(
     }
 )
 
-module.exports = userEnigmaSchema;
+module.exports = enigmaUserSchema;

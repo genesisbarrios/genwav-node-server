@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 const User = mongoose.model('User', userSchema);
-const userEnigma = mongoose.model('UserEnigma', userEnigmaSchema);
+const enigmaUser = mongoose.model('EnigmaUser', enigmaUser);
 
 app.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳');
@@ -53,21 +53,22 @@ app.post('/addUser', async (req, res) => {
 });
 
 app.post('/addUserEnigma', async (req, res) => {
-    const { email, audio, visuals, web } = req.body;
+    const { email, beats, loops, visuals, web } = req.body;
     console.log('add user enigma');
     try {
         // Connect to the database using dbConnect function
         await dbConnect();
 
-        const user = await userEnigma.findOne({ email });
+        const user = await enigmaUser.findOne({ email });
 
         if (user) {
             res.status(400).json({ message: 'You already signed up!' });
         } else {
             // Create a new item
-            const newUser = new userEnigma({
+            const newUser = new enigmaUser({
                 email: email,
-                audio: audio,
+                beats: beats,
+                loops: loops,
                 visuals: visuals,
                 web: web
             });
