@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/addUser', async (req, res) => {
-    const { email, producer, artist, fan } = req.body;
+    const { email, producer, artist, fan, name, phoneNumber, instagram } = req.body;
     console.log(req.body);
     console.log('add user');
     try {
@@ -38,7 +38,10 @@ app.post('/addUser', async (req, res) => {
                 email: email,
                 producer: producer,
                 artist: artist,
-                fan: fan
+                fan: fan,
+                name: name,
+                phoneNumber: phoneNumber,
+                instagram: instagram
             });
 
             // Save the item to the database

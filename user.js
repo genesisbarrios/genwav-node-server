@@ -12,6 +12,8 @@ const userSchema = new Schema(
         producer: Boolean,
         artist: Boolean,
         fan: Boolean,
+        phoneNumber: String,
+        instagram: String,
     },
     {
         timestamps: true

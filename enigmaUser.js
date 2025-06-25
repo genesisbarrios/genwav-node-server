@@ -9,6 +9,8 @@ const enigmaUserSchema = new Schema(
             unique: true
         },
         name: String,
+        phoneNumber: String,
+        instagram: String,
         beats: Boolean,
         loops: Boolean,
         visuals: Boolean,
